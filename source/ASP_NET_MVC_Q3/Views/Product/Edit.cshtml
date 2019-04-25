@@ -1,0 +1,40 @@
+﻿@model ASP_NET_MVC_Q3.Data.Product
+
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width" />
+<title>Edit</title>
+
+
+<h2>修改</h2>
+<form action="/Product/List" method="post">
+
+
+    <div>
+        <label>
+            Name:
+        </label>
+        <p>
+            <input type="text" name="Name" value="@Model.Name" required>
+            @Html.ValidationMessageFor(Model => Model.Name)
+        </p>
+    </div>
+    <div>
+        <label>
+            Locale:
+        </label>
+        <select name="Your Location">
+            <option value="US">Unite State</option>
+            <option value="DE ">Germany</option>
+            <option value="CA ">Canada</option>
+            <option value="ES">Spain</option>
+            <option value="FR">France</option>
+            <option value="JP">Japan</option>
+        </select>
+    </div>
+    <div>
+        <label>
+            <input type="hidden">
+        </label>
+        <button type="submit" class="button02">Check</button>
+</form>
+

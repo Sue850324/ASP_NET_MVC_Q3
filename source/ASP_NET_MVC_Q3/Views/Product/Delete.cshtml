@@ -1,0 +1,29 @@
+﻿@model ASP_NET_MVC_Q3.Data.Product
+
+<h3>確定刪除這筆資料?</h3>
+<div>
+    <table width="100%" cellpadding="0" cellspacing="0" class="table3">
+        <tbody>
+            <tr>
+                <th align="center" valign="center">ProductName</th>
+                <th align="center" valign="center">Locale</th>
+                <th align="center" valign="center">CreateDate</th>
+                <th align="center" valign="center">UpdateDate</th>
+            </tr>
+            <tr>
+                <td>@Model.Name</td>
+                <td>@Model.Locale</td>
+                <td>@Model.CreateDate</td>
+                <td>@Model.UpdateDate</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <a href='@Url.Action("DeletePage", "Product", new {ID = ViewBag, name=Model.Name, Locale=Model.Locale,CreateDate=Model.CreateDate, UpdateDate=Model.UpdateDate})'>刪除</a>
+    @Html.ActionLink("返回前頁", "List")
+}
+
