@@ -1,4 +1,4 @@
-﻿@model ASP_NET_MVC_Q3.Data.Product
+﻿@model ASP_NET_MVC_Q3.Models.DataViewModel
 
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width" />
@@ -6,38 +6,39 @@
 
 
 <h2>修改</h2>
-<form action="/Product/List" method="post">
+<form action="/Product/Edit" method="post">
 
-
+    <div>
+        <label>
+            ID:
+        </label>
+        @Model.product.Id
+        @Html.HiddenFor(m => m.product.Id, Model.product.Id)
+    </div>
     <div>
         <label>
             Name:
         </label>
-        <p>
-            @Html.TextBoxFor(Model => Model.Name)
-            @Html.ValidationMessageFor(Model => Model.Name)
-        </p>
+        @Model.product.Name
+        @Html.TextBoxFor(m => m.product.Name, Model.product.Name)
+        @Html.ValidationMessageFor(Model => Model.product.Name)
     </div>
     <div>
         <label>
             Locale:
         </label>
-        <select name="Your Location">
-            <option value="US">Unite State</option>
-            <option value="DE ">Germany</option>
-            <option value="CA ">Canada</option>
-            <option value="ES">Spain</option>
-            <option value="FR">France</option>
-            <option value="JP">Japan</option>
-        </select>
+        @Html.DropDownListFor(m => m.product.Locale, ViewBag.CategoryID as List<SelectListItem>)
+
     </div>
     <div>
         <label>
-            Update Date:
+            Create Date:
         </label>
-        @Model.UpdateDate
-        @Html.ValidationMessageFor(Model => Model.UpdateDate)
+        @Model.product.CreateDate
+        @Html.HiddenFor(m => m.product.CreateDate, Model.product.CreateDate)
+        @Html.ValidationMessageFor(Model => Model.product.CreateDate)
     </div>
+
     <button type="submit" class="button02">Check</button>
 </form>
 

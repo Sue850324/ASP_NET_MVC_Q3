@@ -1,4 +1,4 @@
-﻿@model ASP_NET_MVC_Q3.Data.Product
+﻿@model ASP_NET_MVC_Q3.Models.DataViewModel
 
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width" />
@@ -6,34 +6,36 @@
 
 
 <h2>新增</h2>
-<form action="/Product/List" method="post">
+<form action="/Product/Add" method="post">
 
     <div>
         <label>
             ID:
-        </label> 
-           @Model.Id
-          <input type="hidden" value="@Model.Id">
+        </label>
+        @Model.product.Id
+        @Html.HiddenFor(m=>m.product.Id, Model.product.Id)
     </div>
     <div>
         <label>
             Name:
         </label>
-            <input type="text" name="Name" value="@Model.Name" required>
-            @Html.ValidationMessageFor(Model => Model.Name)
+        @Html.TextBoxFor(m => m.product.Name, Model.product.Name)
+        @Html.ValidationMessageFor(Model => Model.product.Name)
     </div>
     <div>
         <label>
             Locale:
         </label>
-        @Html.DropDownListFor(m => m.Locale, ViewBag.CategoryID as List<SelectListItem>)
+        @Html.DropDownListFor(m => m.product.Locale, ViewBag.CategoryID as List<SelectListItem>)
+       
     </div>
     <div>
         <label>
             Create Date:
-        </label> 
-        @Model.CreateDate       
-        @Html.ValidationMessageFor(Model => Model.CreateDate)
+        </label>
+        @Model.product.CreateDate
+        @Html.HiddenFor(m => m.product.CreateDate, Model.product.CreateDate)
+        @Html.ValidationMessageFor(Model => Model.product.CreateDate)
     </div>
        
     <button type="submit" class="button02">Check</button>
