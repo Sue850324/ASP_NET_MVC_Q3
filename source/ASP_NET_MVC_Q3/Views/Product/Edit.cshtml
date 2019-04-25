@@ -1,4 +1,4 @@
-﻿@model ASP_NET_MVC_Q3.Models.DataViewModel
+﻿@model ASP_NET_MVC_Q3.Data.Product
 
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width" />
@@ -12,31 +12,38 @@
         <label>
             ID:
         </label>
-        @Model.product.Id
-        @Html.HiddenFor(m => m.product.Id, Model.product.Id)
+        @Model.Id
+        @Html.HiddenFor(m => m.Id, Model.Id)
     </div>
     <div>
         <label>
             Name:
         </label>
-        @Model.product.Name
-        @Html.TextBoxFor(m => m.product.Name, Model.product.Name)
-        @Html.ValidationMessageFor(Model => Model.product.Name)
+        @Html.TextBoxFor(m => m.Name, Model.Name)
+        @Html.ValidationMessageFor(Model => Model.Name)
     </div>
     <div>
         <label>
             Locale:
         </label>
-        @Html.DropDownListFor(m => m.product.Locale, ViewBag.CategoryID as List<SelectListItem>)
-
+        @*@Html.DropDownList("selector", (IEnumerable<SelectListItem>)ViewBag.SelectList)*@
+        @Html.DropDownListFor(m => m.Locale, ViewBag.CategoryID as List<SelectListItem>)
     </div>
     <div>
         <label>
             Create Date:
         </label>
-        @Model.product.CreateDate
-        @Html.HiddenFor(m => m.product.CreateDate, Model.product.CreateDate)
-        @Html.ValidationMessageFor(Model => Model.product.CreateDate)
+        @Model.CreateDate
+        @Html.HiddenFor(m => m.CreateDate, Model.CreateDate)
+        @Html.ValidationMessageFor(Model => Model.CreateDate)
+    </div>
+    <div>
+    <label>
+        Update Date:
+    </label>
+    @Model.UpdateDate
+    @Html.HiddenFor(m => m.UpdateDate, Model.UpdateDate)
+    @Html.ValidationMessageFor(Model => Model.UpdateDate)
     </div>
 
     <button type="submit" class="button02">Check</button>

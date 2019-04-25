@@ -26,7 +26,7 @@
             {
                 <tr>
                     <td>                     
-                        @Html.ActionLink("編輯", "Edit", "Product", new {id=item.Id, name=item.Name, locale=item.Locale,createdate=item.CreateDate,updateDate=item.UpdateDate })
+                        @Html.ActionLink("編輯", "Edit", new {id=item.Id, name=item.Name, locale=item.Locale,createdate=item.CreateDate,updateDate=item.UpdateDate })
                         @Html.ActionLink("刪除", "Delete", "Product", new {name = item.Name, locale = item.Locale, createdate = item.CreateDate, updateDate = item.UpdateDate })
                     </td>
                     <td align="center" valign="center">@item.Id</td>
