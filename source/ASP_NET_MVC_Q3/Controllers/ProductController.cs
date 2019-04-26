@@ -12,6 +12,7 @@ namespace ASP_NET_MVC_Q3.Controllers
     {
         public static int deleteid;
         List<Product> source = Product.Data;
+        int newID = Product.Data.Max(w => w.Id);
         public ActionResult List()
         {             
             return View(source);
@@ -45,6 +46,7 @@ namespace ASP_NET_MVC_Q3.Controllers
         {
             if (ModelState.IsValid)
             {
+                newID = newID + 1;
                 source.Add(new Product() { CreateDate = dataViewModel.product.CreateDate, Id = dataViewModel.product.Id, Locale = dataViewModel.product.Locale, Name = dataViewModel.product.Name });
                 return View("List", source);
             }

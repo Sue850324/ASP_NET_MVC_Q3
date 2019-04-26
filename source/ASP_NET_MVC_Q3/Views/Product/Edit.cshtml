@@ -26,7 +26,6 @@
         <label>
             Locale:
         </label>
-        @*@Html.DropDownList("selector", (IEnumerable<SelectListItem>)ViewBag.SelectList)*@
         @Html.DropDownListFor(m => m.Locale, ViewBag.CategoryID as List<SelectListItem>)
     </div>
     <div>
