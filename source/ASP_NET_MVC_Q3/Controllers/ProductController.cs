@@ -13,7 +13,7 @@ namespace ASP_NET_MVC_Q3.Controllers
         List<Product> source = Product.Data;
         public ActionResult List()
         {
-
+           
             return View(source);
         }
 
@@ -79,15 +79,9 @@ namespace ASP_NET_MVC_Q3.Controllers
 
             if (ModelState.IsValid)
             {
-                //foreach (var item in source)
-                //{
-                //    if (product.Id == item.Id)
-                //    {
-                //        source.Remove(new Product { CreateDate = product.CreateDate, Id = product.Id, Locale = product.Locale, Name = product.Name, UpdateDate = product.UpdateDate });
-                //    }
-
-                //}
+   
                 source.Add(new Product() { CreateDate = product.CreateDate, Id = product.Id, Locale = product.Locale, Name = product.Name, UpdateDate = product.UpdateDate });
+                source = source.OrderBy(o => o.Id).ToList();
                 return View("List", source);
             }
             return View("Edit");
@@ -109,7 +103,6 @@ namespace ASP_NET_MVC_Q3.Controllers
         }
         public ActionResult DeletePage(Product product)
         {
-
             source.RemoveAll(a => a.Id == product.Id);
             return View();
         }
