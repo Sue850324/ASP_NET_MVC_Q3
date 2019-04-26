@@ -10,16 +10,20 @@ namespace ASP_NET_MVC_Q3.Controllers
 {
     public class ProductController : Controller
     {
+        public static int deleteid;
         List<Product> source = Product.Data;
         public ActionResult List()
-        {
-           
+        {             
             return View(source);
         }
 
         public ActionResult Add()
-        {
-            int newID = Product.Data.Max(w => w.Id) + 1;
+        {               
+            int newID = Product.Data.Max(w => w.Id) + 1; 
+            if(newID== deleteid)
+            {
+                newID = newID + 1;
+            }
             DataViewModel dataViewModel = new DataViewModel();
             dataViewModel.product = new Product();
             dataViewModel.product.Id = newID;
@@ -92,6 +96,10 @@ namespace ASP_NET_MVC_Q3.Controllers
             {
                 if (item.Id == product.Id)
                 {             
+                    if (product.Id== Product.Data.Max(w => w.Id))
+                    {
+                        deleteid = product.Id;
+                    }
                     item.Id = product.Id;
                     item.Locale = product.Locale;
                     item.Name = product.Name;
