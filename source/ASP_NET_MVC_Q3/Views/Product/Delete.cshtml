@@ -1,29 +1,26 @@
 ﻿@model ASP_NET_MVC_Q3.Data.Product
 
 <h3>確定刪除這筆資料?</h3>
-<div>
-    <table width="100%" cellpadding="0" cellspacing="0" class="table3">
-        <tbody>
-            <tr>
-                <th align="center" valign="center">ProductName</th>
-                <th align="center" valign="center">Locale</th>
-                <th align="center" valign="center">CreateDate</th>
-                <th align="center" valign="center">UpdateDate</th>
-            </tr>
-            <tr>
-                <td>@Model.Name</td>
-                <td>@Model.Locale</td>
-                <td>@Model.CreateDate</td>
-                <td>@Model.UpdateDate</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<table border="1">
+    <tbody>
+        <tr>
+            <th align="center" valign="center">Id</th>
+            <th align="center" valign="center">ProductName</th>
+            <th align="center" valign="center">Locale</th>
+            <th align="center" valign="center">CreateDate</th>
+            <th align="center" valign="center">UpdateDate</th>
+        </tr>
+        <tr>
+            <td align="center" valign="center">@Model.Id</td>
+            <td align="center" valign="center">@Model.Name</td>
+            <td align="center" valign="center">@Model.Locale</td>
+            <td align="center" valign="center">@Model.CreateDate</td>
+            <td align="center" valign="center">@Model.UpdateDate</td>
+        </tr>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <a href='@Url.Action("DeletePage", "Product", new {ID = ViewBag, name=Model.Name, Locale=Model.Locale,CreateDate=Model.CreateDate, UpdateDate=Model.UpdateDate})'>刪除</a>
+    </tbody>
     @Html.ActionLink("返回前頁", "List")
-}
+  <a href='@Url.Action("DeletePage", "Product", new { id = Model.Id, name = Model.Name, locale = Model.Locale, createdate = Model.CreateDate, updateDate = Model.UpdateDate })'>刪除</a>
+
+
 
