@@ -1,26 +1,75 @@
 ﻿@model ASP_NET_MVC_Q3.Data.Product
+<head>
+    <style>
+        .fancytable {
+            border: 1px solid #cccccc;
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-<h3>確定刪除這筆資料?</h3>
-<table border="1">
-    <tbody>
-        <tr>
-            <th align="center" valign="center">Id</th>
-            <th align="center" valign="center">ProductName</th>
-            <th align="center" valign="center">Locale</th>
-            <th align="center" valign="center">CreateDate</th>
-            <th align="center" valign="center">UpdateDate</th>
-        </tr>
-        <tr>
-            <td align="center" valign="center">@Model.Id</td>
-            <td align="center" valign="center">@Model.Name</td>
-            <td align="center" valign="center">@Model.Locale</td>
-            <td align="center" valign="center">@Model.CreateDate</td>
-            <td align="center" valign="center">@Model.UpdateDate</td>
-        </tr>
+            .fancytable td {
+                border: 1px solid #cccccc;
+                color: #555555;
+                text-align: center;
+                line-height: 28px;
+            }
 
-    </tbody>
-    @Html.ActionLink("返回前頁", "List")
-  <a href='@Url.Action("DeletePage", "Product", new { id = Model.Id, name = Model.Name, locale = Model.Locale, createdate = Model.CreateDate, updateDate = Model.UpdateDate })'>刪除</a>
+        .headerrow {
+            background-color: #0066cc;
+        }
+
+            .headerrow td {
+                color: #ffffff;
+                text-align: center;
+            }
+
+        .datarowodd {
+            background-color: #ffffff;
+        }
+
+        .dataroweven {
+            background-color: #efefef;
+        }
+
+        .datarowodd td {
+            background-color: #ffffff;
+        }
+
+        .dataroweven td {
+            background-color: #efefef;
+        }
+
+        .vintage2 {
+            color: transparent;
+            background-color: blue;
+            text-shadow: rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+            -webkit-background-clip: text;
+        }
+    </style>
+</head>
+
+
+<h3 class="vintage2">確定刪除這筆資料?</h3>
+    <table class="fancytable">
+        <tbody>
+            <tr class="headerrow">
+                <td align="center" valign="center">Id</td>
+                <td align="center" valign="center">ProductName</td>
+                <td align="center" valign="center">Locale</td>
+                <td align="center" valign="center">CreateDate</td>
+                <td align="center" valign="center">UpdateDate</td>
+            </tr>
+            <tr class="datarowodd">
+                <td align="center" valign="center">@Model.Id</td>
+                <td align="center" valign="center">@Model.Name</td>
+                <td align="center" valign="center">@Model.Locale</td>
+                <td align="center" valign="center">@Model.CreateDate</td>
+                <td align="center" valign="center">@Model.UpdateDate</td>
+            </tr>
+
+        </tbody>
+        @Html.ActionLink("返回前頁", "List") |
+        <a href='@Url.Action("DeletePage", "Product", new { id = Model.Id, name = Model.Name, locale = Model.Locale, createdate = Model.CreateDate, updateDate = Model.UpdateDate })'>刪除</a>
 
 
 

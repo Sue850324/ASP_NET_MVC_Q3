@@ -6,28 +6,109 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>List</title>
+    <style>
+        .fancytable {
+            border: 1px solid #cccccc;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .fancytable td {
+                border: 1px solid #cccccc;
+                color: #555555;
+                text-align: center;
+                line-height: 28px;
+            }
+
+        .headerrow {
+            background-color: #0066cc;
+        }
+
+            .headerrow td {
+                color: #ffffff;
+                text-align: center;
+            }
+
+        .datarowodd {
+            background-color: #ffffff;
+        }
+
+        .dataroweven {
+            background-color: #efefef;
+        }
+
+        .datarowodd td {
+            background-color: #ffffff;
+        }
+
+        .dataroweven td {
+            background-color: #efefef;
+        }
+        .vintage2 {
+            color: transparent;
+            background-color: blue;
+            text-shadow: rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+            -webkit-background-clip: text;
+        }
+        .button {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            padding: 7px 7px;
+            border: 1px solid #272d98;
+            border-radius: 7px;
+            background: #4ab1ff;
+            background: -webkit-gradient(linear, left top, left bottom, from(#4ab1ff), to(#284499));
+            background: -moz-linear-gradient(top, #4ab1ff, #284499);
+            background: linear-gradient(to bottom, #4ab1ff, #284499);
+            font: normal normal bold 10px arial;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+            .button:hover,
+            .button:focus {
+                border: 1px solid #2e35b3;
+                background: #59d4ff;
+                background: -webkit-gradient(linear, left top, left bottom, from(#59d4ff), to(#3052b8));
+                background: -moz-linear-gradient(top, #59d4ff, #3052b8);
+                background: linear-gradient(to bottom, #59d4ff, #3052b8);
+                color: #ffffff;
+                text-decoration: none;
+            }
+
+            .button:active {
+                background: #2c6a99;
+                background: -webkit-gradient(linear, left top, left bottom, from(#2c6a99), to(#284499));
+                background: -moz-linear-gradient(top, #2c6a99, #284499);
+                background: linear-gradient(to bottom, #2c6a99, #284499);
+            }
+
+   
+
+    </style>
+    <meta name="viewport" content="width=device-width" / >
+    <title> List</title>
 </head>
 <body>
-    <h2>List</h2>
-    <table border="1">
-        <input type="button" value="新增" onclick="location.href='@Url.Action("Add", "Product")'"/>
+    <h2 class="vintage2">List</h2>
+    <table class="fancytable">
+        <input type="button" class="button" value="新增" onclick="location.href='@Url.Action("Add", "Product")'" />
         <tbody>
-            <tr>
-                <th align="center" valign="center"> Action</th>
-                <th align="center" valign="center">Id</th>
-                <th align="center" valign="center">ProductName</th>
-                <th align="center" valign="center">Locale</th>
-                <th align="center" valign="center">CreateDate</th>
-                <th align="center" valign="center">UpdateDate</th>
+            <tr class="headerrow">
+                <td width="80px" align="center" valign="center"> Action</td>
+                <td align="center" valign="center">Id</td>
+                <td align="center" valign="center">ProductName</td>
+                <td align="center" valign="center">Locale</td>
+                <td align="center" valign="center">CreateDate</th>
+                <td align="center" valign="center">UpdateDate</td>
             </tr>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>                     
-                        @Html.ActionLink("編輯", "Edit", new {id=item.Id, name=item.Name, locale=item.Locale,createdate=item.CreateDate,updateDate=item.UpdateDate })
-                        @Html.ActionLink("刪除", "Delete", new { id = item.Id, name = item.Name, locale = item.Locale, createdate = item.CreateDate, updateDate = item.UpdateDate })
+                <tr class="datarowodd">
+                   <td>
+                       @Html.ActionLink("編輯", "Edit", new { id = item.Id,@class= "datarowodd" })|
+                       @Html.ActionLink("刪除", "Delete", new { id = item.Id, @class = "datarowodd" })
                     </td>
                     <td align="center" valign="center">@item.Id</td>
                     <td align="center" valign="center">@item.Name</td>
@@ -37,6 +118,6 @@
                 </tr>
             }
         </tbody>
-    </table>
+        </>
 </body>
 </html>

@@ -1,43 +1,35 @@
-﻿@model ASP_NET_MVC_Q3.Models.DataViewModel
+﻿@model ASP_NET_MVC_Q3.Data.Product
 
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width" />
 <title>Add</title>
+<head>
+    <style>
+        .vintage2 {
+            color: transparent;
+            background-color: blue;
+            text-shadow: rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+            -webkit-background-clip: text;
+        }
+    </style>
+</head>
 
-
-<h2>新增</h2>
+<h2 class="vintage2">新增</h2>
 <form action="/Product/Add" method="post">
 
     <div>
-        <label>
-            ID:
-        </label>
-        @Model.product.Id
-        @Html.HiddenFor(m=>m.product.Id, Model.product.Id)
-    </div>
-    <div>
-        <label>
+        <span style="font-family:sans-serif;">
             Name:
-        </label>
-        @Html.TextBoxFor(m => m.product.Name, Model.product.Name)
-        @Html.ValidationMessageFor(Model => Model.product.Name)
+        </span>
+        <input type="text" name="Name" @*required*@>
+        @Html.ValidationMessageFor(Model => Model.Name)
     </div>
     <div>
-        <label>
+        <span style="font-family:sans-serif;">
             Locale:
-        </label>
-        @Html.DropDownListFor(m => m.product.Locale, ViewBag.CategoryID as List<SelectListItem>)
-       
+        </span>
+        @Html.DropDownListFor(model => model.Locale, ViewData["items"] as IEnumerable<SelectListItem>, "請選擇")
     </div>
-    <div>
-        <label>
-            Create Date:
-        </label>
-        @Model.product.CreateDate
-        @Html.HiddenFor(m => m.product.CreateDate, Model.product.CreateDate)
-        @Html.ValidationMessageFor(Model => Model.product.CreateDate)
-    </div>
-       
     <button type="submit" class="button02">Check</button>
 </form>
 

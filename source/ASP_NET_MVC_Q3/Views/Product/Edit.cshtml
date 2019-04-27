@@ -1,48 +1,59 @@
 ﻿@model ASP_NET_MVC_Q3.Data.Product
 
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width" />
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+        .vintage2 {
+            color: transparent;
+            background-color: blue;
+            text-shadow: rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+            -webkit-background-clip: text;
+        }
+    </style>
+
+</head>
 <title>Edit</title>
 
 
-<h2>修改</h2>
+<h2 class="vintage2">修改</h2>
 <form action="/Product/Edit" method="post">
 
     <div>
-        <label>
+        <span style="font-family:sans-serif;">
             ID:
-        </label>
+        </span>
         @Model.Id
         @Html.HiddenFor(m => m.Id, Model.Id)
     </div>
     <div>
-        <label>
+        <span style="font-family:sans-serif;">
             Name:
-        </label>
+        </span>
         @Html.TextBoxFor(m => m.Name, Model.Name)
         @Html.ValidationMessageFor(Model => Model.Name)
     </div>
     <div>
-        <label>
+        <span style="font-family:sans-serif;">
             Locale:
-        </label>
-        @Html.DropDownListFor(m => m.Locale, ViewBag.CategoryID as List<SelectListItem>)
+            </span>
+            @Html.DropDownListFor(m => m.Locale, ViewBag.CategoryID as List<SelectListItem>)
     </div>
     <div>
-        <label>
+        <span style="font-family:sans-serif;">
             Create Date:
-        </label>
-        @Model.CreateDate
-        @Html.HiddenFor(m => m.CreateDate, Model.CreateDate)
-        @Html.ValidationMessageFor(Model => Model.CreateDate)
+            </span>
+            @Model.CreateDate
+            @Html.HiddenFor(m => m.CreateDate, Model.CreateDate)
+            @Html.ValidationMessageFor(Model => Model.CreateDate)
     </div>
     <div>
-    <label>
-        Update Date:
-    </label>
-    @Model.UpdateDate
-    @Html.HiddenFor(m => m.UpdateDate, Model.UpdateDate)
-    @Html.ValidationMessageFor(Model => Model.UpdateDate)
+        <span>
+            Update Date:
+        </span>
+        @Model.UpdateDate
+        @Html.HiddenFor(m => m.UpdateDate, Model.UpdateDate)
+        @Html.ValidationMessageFor(Model => Model.UpdateDate)
     </div>
 
     <button type="submit" class="button02">Check</button>

@@ -11,12 +11,13 @@ namespace ASP_NET_MVC_Q3.Data
     {
         [Key]
         public int Id { get; set; }
+
         public int CountID { get; set; }
+
         [Required(ErrorMessage = "*此為必填欄位!")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "*此為必填欄位!")]
+
         public string Locale { get; set; }
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]
         public DateTime CreateDate { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]
         public DateTime? UpdateDate { get; set; }
