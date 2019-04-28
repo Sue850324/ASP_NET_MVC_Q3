@@ -37,7 +37,7 @@
         <span style="font-family:sans-serif;">
             Locale:
             </span>
-            @Html.DropDownListFor(m => m.Locale, ViewBag.CategoryID as List<SelectListItem>)
+            @Html.DropDownListFor(m => m.Locale, ViewData["items"] as List<SelectListItem>)
     </div>
     <div>
         <span style="font-family:sans-serif;">

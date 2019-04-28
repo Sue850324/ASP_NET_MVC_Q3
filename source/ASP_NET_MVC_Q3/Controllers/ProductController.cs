@@ -12,6 +12,40 @@ namespace ASP_NET_MVC_Q3.Controllers
     {
         public static int Maxid = Product.Data.Max(w => w.Id);
         List<Product> source = Product.Data;
+
+        public object Locale()
+        {
+            var itemlist = new List<SelectListItem>();
+            itemlist.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
+            itemlist.Add(new SelectListItem { Text = "Germany", Value = "EU" });
+            itemlist.Add(new SelectListItem { Text = "Canada", Value = "CA" });
+            itemlist.Add(new SelectListItem { Text = "Spain", Value = "ES" });
+            itemlist.Add(new SelectListItem { Text = "France", Value = "FR" });
+            itemlist.Add(new SelectListItem { Text = "Japen", Value = "JP" });       
+            return  ViewData["items"] = itemlist;
+        }
+
+        public Product findData(int id)
+        {
+            Product product = new Product();
+            foreach (var item in source)
+            {
+                if (item.Id == id)
+                {
+                    product.Id = item.Id;
+                    product.Locale = item.Locale;
+                    product.Name = item.Name;
+                    product.CreateDate = item.CreateDate;
+                }
+            }         
+            return product;
+        }
+
+        public List<Product> RemoveSource(Product product)
+        {
+            source.RemoveAll(a => a.Id == product.Id);
+            return source;
+        }
         public ActionResult List()
         {
             source = source.OrderBy(o => o.Id).ToList();
@@ -20,14 +54,7 @@ namespace ASP_NET_MVC_Q3.Controllers
 
         public ActionResult Add()
         {
-            var itemlist = new List<SelectListItem>();
-            itemlist.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
-            itemlist.Add(new SelectListItem { Text = "Germany", Value = "EU" });
-            itemlist.Add(new SelectListItem { Text = "Canada", Value = "CA" });
-            itemlist.Add(new SelectListItem { Text = "Spain", Value = "ES" });
-            itemlist.Add(new SelectListItem { Text = "France", Value = "FR" });
-            itemlist.Add(new SelectListItem { Text = "Japen", Value = "JP" });
-            ViewData["items"] = itemlist;
+            Locale();
             return View();
         }
 
@@ -52,28 +79,11 @@ namespace ASP_NET_MVC_Q3.Controllers
         public ActionResult Edit(int id)
         {
             Product product = new Product();
-            foreach (var item in source)
-            {
-                if (item.Id == id)
-                {
-                    product.Id = item.Id;
-                    product.Locale = item.Locale;
-                    product.Name = item.Name;
-                    product.CreateDate = item.CreateDate;
-
-                }
-            }
-            var itemlist = new List<SelectListItem>();
-            itemlist.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
-            itemlist.Add(new SelectListItem { Text = "Germany", Value = "EU" });
-            itemlist.Add(new SelectListItem { Text = "Canada", Value = "CA" });
-            itemlist.Add(new SelectListItem { Text = "Spain", Value = "ES" });
-            itemlist.Add(new SelectListItem { Text = "France", Value = "FR" });
-            itemlist.Add(new SelectListItem { Text = "Japen", Value = "JP" });
-            ViewBag.CategoryID = itemlist;
+            product = findData(id);
+            Locale();
             var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             product.UpdateDate = DateTime.Parse(time);
-            source.RemoveAll(a => a.Id == product.Id);
+            RemoveSource(product);
             return View(product);
         }
         [HttpPost]
@@ -89,23 +99,11 @@ namespace ASP_NET_MVC_Q3.Controllers
         }
         public ActionResult Delete(int id)
         {
-            Product product = new Product();
-            foreach (var item in source)
-            {
-                if (id == item.Id)
-                {              
-                    product.Id = item.Id;
-                    product.Locale = item.Locale;
-                    product.Name = item.Name;
-                    product.CreateDate = item.CreateDate;
-                    product.UpdateDate = item.UpdateDate;
-                }
-            }
-            return View(product);
+            return View(findData(id));
         }
         public ActionResult DeletePage(Product product)
         {
-            source.RemoveAll(a => a.Id == product.Id);
+            RemoveSource(product);            
             return View();
         }
     }
