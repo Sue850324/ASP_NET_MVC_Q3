@@ -88,11 +88,11 @@ namespace ASP_NET_MVC_Q3.Controllers
         {    
             if (ModelState.IsValid)
             {
-                RemoveSource(product);
-                var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                product.UpdateDate = DateTime.Parse(time);
-                source.Add(new Product() { CreateDate = product.CreateDate, Id = product.Id, Locale = product.Locale, Name = product.Name, UpdateDate = product.UpdateDate });            
-                return RedirectToAction("List", source);
+                var update = Product.Data.Where(x=>x.Id==product.Id).FirstOrDefault();
+                update.Name = product.Name;
+                update.Locale = product.Locale;
+                update.UpdateDate=DateTime.Now;
+                return RedirectToAction("List", update);
             }
             return RedirectToAction("Edit");
         }
