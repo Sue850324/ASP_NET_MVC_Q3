@@ -80,22 +80,21 @@ namespace ASP_NET_MVC_Q3.Controllers
         {
             Product product = new Product();
             product = findData(id);
-            Locale();
-            var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            product.UpdateDate = DateTime.Parse(time);
-            RemoveSource(product);
+            Locale();                       
             return View(product);
         }
         [HttpPost]
         public ActionResult Edit(Product product)
-        {
-
+        {    
             if (ModelState.IsValid)
             {
+                RemoveSource(product);
+                var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                product.UpdateDate = DateTime.Parse(time);
                 source.Add(new Product() { CreateDate = product.CreateDate, Id = product.Id, Locale = product.Locale, Name = product.Name, UpdateDate = product.UpdateDate });            
                 return RedirectToAction("List", source);
             }
-            return View("Edit");
+            return RedirectToAction("Edit");
         }
         public ActionResult Delete(int id)
         {

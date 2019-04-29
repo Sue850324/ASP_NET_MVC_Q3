@@ -30,7 +30,7 @@
         <span style="font-family:sans-serif;">
             Name:
         </span>
-        @Html.TextBoxFor(m => m.Name, Model.Name)
+        <input type="text" name="Name" value="@Model.Name" required>
         @Html.ValidationMessageFor(Model => Model.Name)
     </div>
     <div>
@@ -46,16 +46,7 @@
             @Model.CreateDate
             @Html.HiddenFor(m => m.CreateDate, Model.CreateDate)
             @Html.ValidationMessageFor(Model => Model.CreateDate)
-    </div>
-    <div>
-        <span>
-            Update Date:
-        </span>
-        @Model.UpdateDate
-        @Html.HiddenFor(m => m.UpdateDate, Model.UpdateDate)
-        @Html.ValidationMessageFor(Model => Model.UpdateDate)
-    </div>
-
+    </div>   
     <button type="submit" class="button02">Check</button>
 </form>
 
