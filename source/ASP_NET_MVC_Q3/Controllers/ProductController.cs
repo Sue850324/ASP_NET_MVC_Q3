@@ -15,17 +15,17 @@ namespace ASP_NET_MVC_Q3.Controllers
 
         public object Locale()
         {
-            var itemlist = new List<SelectListItem>();
-            itemlist.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
-            itemlist.Add(new SelectListItem { Text = "Germany", Value = "EU" });
-            itemlist.Add(new SelectListItem { Text = "Canada", Value = "CA" });
-            itemlist.Add(new SelectListItem { Text = "Spain", Value = "ES" });
-            itemlist.Add(new SelectListItem { Text = "France", Value = "FR" });
-            itemlist.Add(new SelectListItem { Text = "Japen", Value = "JP" });       
-            return  ViewData["items"] = itemlist;
+            var itemList = new List<SelectListItem>();
+            itemList.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
+            itemList.Add(new SelectListItem { Text = "Germany", Value = "EU" });
+            itemList.Add(new SelectListItem { Text = "Canada", Value = "CA" });
+            itemList.Add(new SelectListItem { Text = "Spain", Value = "ES" });
+            itemList.Add(new SelectListItem { Text = "France", Value = "FR" });
+            itemList.Add(new SelectListItem { Text = "Japen", Value = "JP" });       
+            return  ViewData["items"] = itemList;
         }
 
-        public Product findData(int id)
+        public Product FindData(int id)
         {
             Product product = new Product();
             foreach (var item in source)
@@ -79,7 +79,7 @@ namespace ASP_NET_MVC_Q3.Controllers
         public ActionResult Edit(int id)
         {
             Product product = new Product();
-            product = findData(id);
+            product = FindData(id);
             Locale();                       
             return View(product);
         }
@@ -98,7 +98,7 @@ namespace ASP_NET_MVC_Q3.Controllers
         }
         public ActionResult Delete(int id)
         {
-            return View(findData(id));
+            return View(FindData(id));
         }
         public ActionResult DeletePage(Product product)
         {
