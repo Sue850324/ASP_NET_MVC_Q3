@@ -48,7 +48,6 @@ namespace ASP_NET_MVC_Q3.Controllers
         }
         public ActionResult List()
         {
-            source = source.OrderBy(o => o.Id).ToList();
             return View(source);
         }
 
