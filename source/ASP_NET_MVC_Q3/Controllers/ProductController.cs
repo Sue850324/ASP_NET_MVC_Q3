@@ -1,5 +1,6 @@
 ﻿using ASP_NET_MVC_Q3.Data;
 using ASP_NET_MVC_Q3.Models;
+using ASP_NET_MVC_Q3.Models.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,7 @@ namespace ASP_NET_MVC_Q3.Controllers
 {
     public class ProductController : Controller
     {
-        public static int Maxid = Product.Data.Max(w => w.Id);
         List<Product> source = Product.Data;
-
         public object Locale()
         {
             var itemList = new List<SelectListItem>();
@@ -23,28 +22,6 @@ namespace ASP_NET_MVC_Q3.Controllers
             itemList.Add(new SelectListItem { Text = "France", Value = "FR" });
             itemList.Add(new SelectListItem { Text = "Japen", Value = "JP" });       
             return  ViewData["items"] = itemList;
-        }
-
-        public Product FindData(int id)
-        {
-            Product product = new Product();
-            foreach (var item in source)
-            {
-                if (item.Id == id)
-                {
-                    product.Id = item.Id;
-                    product.Locale = item.Locale;
-                    product.Name = item.Name;
-                    product.CreateDate = item.CreateDate;
-                }
-            }         
-            return product;
-        }
-
-        public List<Product> RemoveSource(Product product)
-        {
-            source.RemoveAll(a => a.Id == product.Id);
-            return source;
         }
         public ActionResult List()
         {
@@ -63,22 +40,16 @@ namespace ASP_NET_MVC_Q3.Controllers
         {
 
             if (ModelState.IsValid)
-            {
-                product.Id = Maxid + 1;
-                Maxid = Maxid + 1;
-                var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                product.CreateDate = DateTime.Parse(time);
-                source.Add(new Product() { CreateDate = product.CreateDate, Id = product.Id, Locale = product.Locale, Name = product.Name });
-                return RedirectToAction("List", source);
+            {               
+                new CRUD().Add(product);
+                return RedirectToAction("List");
             }
-
-
             return RedirectToAction("Add", product);
         }
         public ActionResult Edit(int id)
         {
             Product product = new Product();
-            product = FindData(id);
+            product = new CRUD().FindData(id);
             Locale();                       
             return View(product);
         }
@@ -87,21 +58,18 @@ namespace ASP_NET_MVC_Q3.Controllers
         {    
             if (ModelState.IsValid)
             {
-                var update = Product.Data.Where(x=>x.Id==product.Id).FirstOrDefault();
-                update.Name = product.Name;
-                update.Locale = product.Locale;
-                update.UpdateDate=DateTime.Now;
-                return RedirectToAction("List", update);
+                new CRUD().Edit(product);
+                return RedirectToAction("List");
             }
             return RedirectToAction("Edit");
         }
         public ActionResult Delete(int id)
         {
-            return View(FindData(id));
+            return View(new CRUD().FindData(id));
         }
         public ActionResult DeletePage(Product product)
         {
-            RemoveSource(product);            
+            new CRUD().Delete(product);      
             return View();
         }
     }
