@@ -53,5 +53,16 @@ namespace ASP_NET_MVC_Q3.Models.Infrastructure.Repository
             }
             return product;
         }
+        public object Locale()
+        {
+            var itemList = new List<SelectListItem>();
+            itemList.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
+            itemList.Add(new SelectListItem { Text = "Germany", Value = "EU" });
+            itemList.Add(new SelectListItem { Text = "Canada", Value = "CA" });
+            itemList.Add(new SelectListItem { Text = "Spain", Value = "ES" });
+            itemList.Add(new SelectListItem { Text = "France", Value = "FR" });
+            itemList.Add(new SelectListItem { Text = "Japen", Value = "JP" });       
+            return itemList;
+        }
     }
 }

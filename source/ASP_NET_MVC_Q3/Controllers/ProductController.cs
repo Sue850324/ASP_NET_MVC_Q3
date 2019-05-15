@@ -12,17 +12,7 @@ namespace ASP_NET_MVC_Q3.Controllers
     public class ProductController : Controller
     {
         List<Product> source = Product.Data;
-        public object Locale()
-        {
-            var itemList = new List<SelectListItem>();
-            itemList.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
-            itemList.Add(new SelectListItem { Text = "Germany", Value = "EU" });
-            itemList.Add(new SelectListItem { Text = "Canada", Value = "CA" });
-            itemList.Add(new SelectListItem { Text = "Spain", Value = "ES" });
-            itemList.Add(new SelectListItem { Text = "France", Value = "FR" });
-            itemList.Add(new SelectListItem { Text = "Japen", Value = "JP" });       
-            return  ViewData["items"] = itemList;
-        }
+        
         public ActionResult List()
         {
             return View(source);
@@ -30,7 +20,7 @@ namespace ASP_NET_MVC_Q3.Controllers
 
         public ActionResult Add()
         {
-            Locale();
+            ViewData["items"]= new ProductRepository().Locale();
             return View();
         }
 
@@ -48,7 +38,7 @@ namespace ASP_NET_MVC_Q3.Controllers
         {
             Product product = new Product();
             product = new ProductRepository().FindData(id);
-            Locale();                       
+            ViewData["items"] = new ProductRepository().Locale();                       
             return View(product);
         }
         [HttpPost]
