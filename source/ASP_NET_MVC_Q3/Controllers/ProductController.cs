@@ -35,13 +35,11 @@ namespace ASP_NET_MVC_Q3.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Add(Product product)
         {
-
             if (ModelState.IsValid)
             {               
-                new CRUD().Add(product);
+                new ProductRepository().Add(product);
                 return RedirectToAction("List");
             }
             return RedirectToAction("Add", product);
@@ -49,7 +47,7 @@ namespace ASP_NET_MVC_Q3.Controllers
         public ActionResult Edit(int id)
         {
             Product product = new Product();
-            product = new CRUD().FindData(id);
+            product = new ProductRepository().FindData(id);
             Locale();                       
             return View(product);
         }
@@ -58,18 +56,18 @@ namespace ASP_NET_MVC_Q3.Controllers
         {    
             if (ModelState.IsValid)
             {
-                new CRUD().Edit(product);
+                new ProductRepository().Edit(product);
                 return RedirectToAction("List");
             }
             return RedirectToAction("Edit");
         }
         public ActionResult Delete(int id)
         {
-            return View(new CRUD().FindData(id));
+            return View(new ProductRepository().FindData(id));
         }
         public ActionResult DeletePage(Product product)
         {
-            new CRUD().Delete(product);      
+            new ProductRepository().Delete(product);      
             return View();
         }
     }

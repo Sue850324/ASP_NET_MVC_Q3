@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASP_NET_MVC_Q3.Models.Interface
 {
-    interface ICRUD
+    interface IProductRepository
     {
         void Add(Product product);
         void Edit(Product product);

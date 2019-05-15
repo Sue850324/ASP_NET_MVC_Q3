@@ -8,8 +8,8 @@ using System.Web.Mvc;
 
 namespace ASP_NET_MVC_Q3.Models.Infrastructure.Repository
 {
-    public class CRUD : ICRUD
-    {
+    public class ProductRepository : IProductRepository
+    { 
         public static int Maxid = Product.Data.Max(w => w.Id);
         List<Product> source = Product.Data;
         public List<Product> RemoveSource(Product product)
