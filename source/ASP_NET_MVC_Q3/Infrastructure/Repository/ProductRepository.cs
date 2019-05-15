@@ -10,7 +10,7 @@ namespace ASP_NET_MVC_Q3.Models.Infrastructure.Repository
 {
     public class ProductRepository : IProductRepository
     { 
-        public static int Maxid = Product.Data.Max(w => w.Id);
+        private static int _maxID = Product.Data.Max(w => w.Id);
         List<Product> source = Product.Data;
         public List<Product> RemoveSource(Product product)
         {
@@ -19,8 +19,8 @@ namespace ASP_NET_MVC_Q3.Models.Infrastructure.Repository
         }
         public void Add(Product product)
         {
-            product.Id = Maxid + 1;
-            Maxid = Maxid + 1;
+            product.Id = _maxID + 1;
+            _maxID = _maxID + 1;
             var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             product.CreateDate = DateTime.Parse(time);
             source.Add(new Product() { CreateDate = product.CreateDate, Id = product.Id, Locale = product.Locale, Name = product.Name });
