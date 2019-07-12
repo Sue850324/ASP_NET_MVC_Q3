@@ -12,6 +12,17 @@ namespace ASP_NET_MVC_Q3.Models.Infrastructure.Repository
     { 
         private static int _maxID = Product.Data.Max(w => w.Id);
         List<Product> source = Product.Data;
+        public object Locale()
+        {
+            var itemList = new List<SelectListItem>();
+            itemList.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
+            itemList.Add(new SelectListItem { Text = "Germany", Value = "EU" });
+            itemList.Add(new SelectListItem { Text = "Canada", Value = "CA" });
+            itemList.Add(new SelectListItem { Text = "Spain", Value = "ES" });
+            itemList.Add(new SelectListItem { Text = "France", Value = "FR" });
+            itemList.Add(new SelectListItem { Text = "Japen", Value = "JP" });
+            return itemList;
+        }
         public List<Product> RemoveSource(Product product)
         {
             source.RemoveAll(a => a.Id == product.Id);
@@ -24,7 +35,6 @@ namespace ASP_NET_MVC_Q3.Models.Infrastructure.Repository
             var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             product.CreateDate = DateTime.Parse(time);
             source.Add(new Product() { CreateDate = product.CreateDate, Id = product.Id, Locale = product.Locale, Name = product.Name });
-
         }
         public void Edit(Product product)
         {
@@ -52,17 +62,6 @@ namespace ASP_NET_MVC_Q3.Models.Infrastructure.Repository
                 }                
             }
             return product;
-        }
-        public object Locale()
-        {
-            var itemList = new List<SelectListItem>();
-            itemList.Add(new SelectListItem { Text = "Unite State", Value = "US", Selected = true });
-            itemList.Add(new SelectListItem { Text = "Germany", Value = "EU" });
-            itemList.Add(new SelectListItem { Text = "Canada", Value = "CA" });
-            itemList.Add(new SelectListItem { Text = "Spain", Value = "ES" });
-            itemList.Add(new SelectListItem { Text = "France", Value = "FR" });
-            itemList.Add(new SelectListItem { Text = "Japen", Value = "JP" });       
-            return itemList;
-        }
+        }       
     }
 }

@@ -1,53 +1,8 @@
 ﻿@model ASP_NET_MVC_Q3.Data.Product
 <head>
-    <style>
-        .fancytable {
-            border: 1px solid #cccccc;
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-            .fancytable td {
-                border: 1px solid #cccccc;
-                color: #555555;
-                text-align: center;
-                line-height: 28px;
-            }
-
-        .headerrow {
-            background-color: #0066cc;
-        }
-
-            .headerrow td {
-                color: #ffffff;
-                text-align: center;
-            }
-
-        .datarowodd {
-            background-color: #ffffff;
-        }
-
-        .dataroweven {
-            background-color: #efefef;
-        }
-
-        .datarowodd td {
-            background-color: #ffffff;
-        }
-
-        .dataroweven td {
-            background-color: #efefef;
-        }
-
-        .vintage2 {
-            color: transparent;
-            background-color: blue;
-            text-shadow: rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
-            -webkit-background-clip: text;
-        }
-    </style>
+    <link href="~/Content/table.css" rel="stylesheet" />
+    <link href="~/Content/word.css" rel="stylesheet" />
 </head>
-
 
 <h3 class="vintage2">確定刪除這筆資料?</h3>
     <table class="fancytable">
@@ -68,6 +23,7 @@
             </tr>
 
         </tbody>
+        </table>
         @Html.ActionLink("返回前頁", "List") |
         <a href='@Url.Action("DeletePage", "Product", new { id = Model.Id, name = Model.Name, locale = Model.Locale, createdate = Model.CreateDate, updateDate = Model.UpdateDate })'>刪除</a>
 
